@@ -26,6 +26,87 @@ group {
         policy: score
         interrupt_connections: true
     }
+   # YouTube
+    youtube {
+       filter: group(sg)
+       filter: group(hk)
+       filter: group(vn)
+       policy: score
+       final: auto
+       interrupt_connections: true
+    }
+   # Google
+    google {
+       filter: group(sg)
+       filter: group(hk)
+       filter: group(vn)
+       policy: score
+       final: auto
+       interrupt_connections: true
+    }
+   # github
+    github {
+       filter: group(sg)
+       filter: group(hk)
+       filter: group(vn)
+       policy: score
+       final: auto
+       interrupt_connections: true
+    }
+   # 国外媒体
+    media {
+       filter: group(proxy)
+       policy: select
+       interrupt_connections: true
+    }
+   # Telegram
+    telegram {
+       filter: group(hk)
+       filter: group(vn)
+       policy: select
+       final: proxy
+       interrupt_connections: true
+    }
+    game {
+        filter: group(sg)
+        filter: group(jp)
+        filter: group(kr)
+        filter: group(vn)
+        filter: group(hk)
+        filter: group(ao)
+        filter: group(tw)
+        policy: select
+        default: hk
+        final: proxy
+    }
+   # OpenAI
+    ai {
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])can(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])canada(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])toronto(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])yyz(?:[^a-z0-9]|$)|加拿大|🇨🇦')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
+       policy: select
+       interrupt_connections: true
+    }
+   # Netflix
+    netflix {
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
+       policy: select
+       interrupt_connections: true
+    }
+   # 巴哈姆特
+    bahamut {
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
+       policy: select
+       default: 'tw'
+       interrupt_connections: true
+    }
    # 🇭🇰 香港
     hk {
        filter: name(regex: '港|HK|Hong Kong|HongKong|🇭🇰')
@@ -66,75 +147,6 @@ group {
        filter: name(regex: '(?i)(?:^|[^a-z0-9])vn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vnm(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vietnam(?:[^a-z0-9]|$)|越南|🇻🇳')
        policy: min_moving_avg
     }
-   # YouTube
-    youtube {
-       filter: group(hk)
-       filter: group(sg)
-       filter: group(vn)
-       policy: score
-       final: auto
-       interrupt_connections: true
-    }
-   # Google
-    google {
-       filter: group(hk)
-       filter: group(sg)
-       filter: group(vn)
-       policy: score
-       final: auto
-       interrupt_connections: true
-    }
-   # github
-    github {
-       filter: group(hk)
-       filter: group(sg)
-       filter: group(vn)
-       policy: score
-       final: auto
-       interrupt_connections: true
-    }
-   # 国外媒体
-    media {
-       filter: group(proxy)
-       policy: select
-       interrupt_connections: true
-    }
-   # Telegram
-    telegram {
-       filter: group(hk)
-       filter: group(vn)
-       policy: select
-       final: proxy
-       interrupt_connections: true
-    }
-   # OpenAI
-    ai {
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])can(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])canada(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])toronto(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])yyz(?:[^a-z0-9]|$)|加拿大|🇨🇦')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
-       policy: select
-       interrupt_connections: true
-    }
-   # Netflix
-    netflix {
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
-       policy: select
-       interrupt_connections: true
-    }
-   # 巴哈姆特
-    bahamut {
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
-       policy: select
-       default: 'tw'
-       interrupt_connections: true
-    }
 }
 
 dns {
@@ -166,7 +178,7 @@ routing {
   # Block UDP/443
   l4proto(udp) && dport(443) -> block
   # Google China services and mainland games
-  domain(geosite:google-cn, geosite:category-games@cn) -> direct
+  domain(geosite: google-cn, geosite: 'geosite:category-games@cn') -> direct
   # Microsoft
   domain(geosite:microsoft) -> direct
   # Apple
@@ -238,3 +250,4 @@ subscription {
         ua: 'v2rayN'
         interval: 24h
     }
+}
