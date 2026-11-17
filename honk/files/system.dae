@@ -19,4 +19,15 @@ experimental {
         config_write: true
         ui: '/usr/share/doona'
     }
+    # 【2026-11-17】Clash API 预置：绑 0.0.0.0，端口 9090。
+    # secret 由 /etc/uci-defaults/90-honk 在首次开机时换成 16 位随机值。
+    # 为什么放在 system.dae 而不是让 uci 生成：本配置的 config.dae 自带
+    # global 段，honk 判定 settings 由文件托管（config_settings_owned_by_file），
+    # 从此不再自动写 system.dae，uci 开关再改也不会生成这块。
+    clash_api {
+        external_controller: '0.0.0.0:9090'
+        external_ui: '/usr/share/honk/zashboard'
+        secret: 'honk-9090-placeholder'
+        default_mode: Rule
+    }
 }
