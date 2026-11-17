@@ -14,7 +14,7 @@ group {
         policy: min_moving_avg
         interrupt_connections: true
     }
-   # 自动选择
+    # 自动选择
     auto {
         filter: group(sg)
         filter: group(jp)
@@ -26,46 +26,46 @@ group {
         policy: score
         interrupt_connections: true
     }
-   # YouTube
+    # YouTube
     youtube {
-       filter: group(sg)
-       filter: group(hk)
-       filter: group(vn)
-       policy: score
-       final: auto
-       interrupt_connections: true
+        filter: group(sg)
+        filter: group(hk)
+        filter: group(vn)
+        policy: score
+        final: auto
+        interrupt_connections: true
     }
-   # Google
+    # Google
     google {
-       filter: group(sg)
-       filter: group(hk)
-       filter: group(vn)
-       policy: score
-       final: auto
-       interrupt_connections: true
+        filter: group(sg)
+        filter: group(hk)
+        filter: group(vn)
+        policy: score
+        final: auto
+        interrupt_connections: true
     }
-   # github
+    # github
     github {
-       filter: group(sg)
-       filter: group(hk)
-       filter: group(vn)
-       policy: score
-       final: auto
-       interrupt_connections: true
+        filter: group(sg)
+        filter: group(hk)
+        filter: group(vn)
+        policy: score
+        final: auto
+        interrupt_connections: true
     }
-   # 国外媒体
+    # 国外媒体
     media {
-       filter: group(proxy)
-       policy: select
-       interrupt_connections: true
+        filter: group(proxy)
+        policy: select
+        interrupt_connections: true
     }
-   # Telegram
+    # Telegram
     telegram {
-       filter: group(hk)
-       filter: group(vn)
-       policy: select
-       final: proxy
-       interrupt_connections: true
+        filter: group(hk)
+        filter: group(vn)
+        policy: select
+        final: proxy
+        interrupt_connections: true
     }
     game {
         filter: group(sg)
@@ -79,78 +79,78 @@ group {
         default: hk
         final: proxy
     }
-   # OpenAI
+    # OpenAI
     ai {
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])can(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])canada(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])toronto(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])yyz(?:[^a-z0-9]|$)|加拿大|🇨🇦')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
-       policy: select
-       interrupt_connections: true
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])can(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])canada(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])toronto(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])yyz(?:[^a-z0-9]|$)|加拿大|🇨🇦')
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
+        policy: select
+        interrupt_connections: true
     }
-   # Netflix
+    # Netflix
     netflix {
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
-       policy: select
-       interrupt_connections: true
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
+        policy: select
+        interrupt_connections: true
     }
-   # 巴哈姆特
+    # 巴哈姆特
     bahamut {
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
-       policy: select
-       default: 'tw'
-       interrupt_connections: true
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
+        policy: select
+        default: 'tw'
+        interrupt_connections: true
     }
-   # 🇭🇰 香港
+    # 🇭🇰 香港
     hk {
-       filter: name(regex: '港|HK|Hong Kong|HongKong|🇭🇰')
-       policy: min_moving_avg
+        filter: name(regex: '港|HK|Hong Kong|HongKong|🇭🇰')
+        policy: min_moving_avg
     }
-   # ao 澳门
+    # ao 澳门
     ao {
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
-       policy: min_moving_avg
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
+        policy: min_moving_avg
     }
-   # 🇹🇼 台湾
+    # 🇹🇼 台湾
     tw {
-       filter: name(regex: '台|臺|TW|Taiwan|🇹🇼')
-       policy: min_moving_avg
+        filter: name(regex: '台|臺|TW|Taiwan|🇹🇼')
+        policy: min_moving_avg
     }
-   # 🇺🇸 美国
+    # 🇺🇸 美国
     us {
-       filter: name(regex: '美|US|United States|America|🇺🇸')
-       policy: min_moving_avg
+        filter: name(regex: '美|US|United States|America|🇺🇸')
+        policy: min_moving_avg
     }
-   # 🇸🇬 新加坡
+    # 🇸🇬 新加坡
     sg {
-       filter: name(regex: '新加坡|獅城|狮城|SG|Singapore|🇸🇬')
-       policy: min_moving_avg
+        filter: name(regex: '新加坡|獅城|狮城|SG|Singapore|🇸🇬')
+        policy: min_moving_avg
     }
-   # 🇯🇵 日本
+    # 🇯🇵 日本
     jp {
-       filter: name(regex: '日|JP|Japan|Tokyo|🇯🇵')
-       policy: min_moving_avg
+        filter: name(regex: '日|JP|Japan|Tokyo|🇯🇵')
+        policy: min_moving_avg
     }
-   # 🇰🇷 韩国
+    # 🇰🇷 韩国
     kr {
-       filter: name(regex: '韓|韩|KR|Korea|🇰🇷')
-       policy: min_moving_avg
+        filter: name(regex: '韓|韩|KR|Korea|🇰🇷')
+        policy: min_moving_avg
     }
-   # VN 越南
+    # VN 越南
     vn {
-       filter: name(regex: '(?i)(?:^|[^a-z0-9])vn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vnm(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vietnam(?:[^a-z0-9]|$)|越南|🇻🇳')
-       policy: min_moving_avg
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])vn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vnm(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vietnam(?:[^a-z0-9]|$)|越南|🇻🇳')
+        policy: min_moving_avg
     }
 }
 
 dns {
-    
+
     upstream {
         lin: 'tcp://127.0.0.1:53'
         sea: 'tcp://127.0.0.1:6553'
@@ -170,47 +170,49 @@ dns {
 }
 
 routing {
-  # NetworkManager
-  pname(NetworkManager) -> direct
-  # dae presets: the LAN and multicast stay off the proxy
-  dip(224.0.0.0/3, 'ff00::/8') -> direct
-  dip(geoip:private) -> direct
-  # Block UDP/443
-  l4proto(udp) && dport(443) -> block
-  # Google China services and mainland games
-  domain(geosite: google-cn, geosite: 'geosite:category-games@cn') -> direct
-  # Microsoft
-  domain(geosite:microsoft) -> direct
-  # Apple
-  domain(geosite:apple) -> direct
-  # Telegram
-  domain(geosite:telegram) -> telegram
-  dip(geoip:telegram) -> telegram
-  # OpenAI
-  domain(geosite:openai) -> ai
-  # NetEase Music
-  domain(geosite:netease) -> direct
-  # Games
-  domain(geosite:category-games) -> direct
-  # YouTube
-  domain(geosite:youtube) -> youtube
-  # Netflix
-  domain(geosite:netflix) -> netflix
-  # Bahamut
-  domain(geosite:bahamut) -> bahamut
-  # Bilibili
-  domain(geosite:bilibili) -> direct
-  # Overseas media
-  domain(geosite:youtube, geosite:netflix, geosite:disney, geosite:hbo, geosite:primevideo, geosite:twitch, geosite:spotify) -> media
-  # GFW list
-  domain(geosite:github) -> github
-  domain(geosite:google) -> google
-  domain(geosite:google-gemini) -> google
-  domain(geosite:gfw) -> proxy
-  # Mainland China
-  domain(geosite:cn) -> direct
-  dip(geoip:cn) -> direct
-  fallback: proxy
+    # NetworkManager
+    pname(NetworkManager) -> direct
+    # dae presets: the LAN and multicast stay off the proxy
+    dip(224.0.0.0/3, 'ff00::/8') -> direct
+    # honk:local-direct-begin
+    # honk:local-direct-end
+    dip(geoip:private) -> direct
+    # Block UDP/443
+    l4proto(udp) && dport(443) -> block
+    # Google China services and mainland games
+    domain(geosite: google-cn, geosite: 'geosite:category-games@cn') -> direct
+    # Microsoft
+    domain(geosite:microsoft) -> direct
+    # Apple
+    domain(geosite:apple) -> direct
+    # Telegram
+    domain(geosite:telegram) -> telegram
+    dip(geoip:telegram) -> telegram
+    # OpenAI
+    domain(geosite:openai) -> ai
+    # NetEase Music
+    domain(geosite:netease) -> direct
+    # Games
+    domain(geosite:category-games) -> direct
+    # YouTube
+    domain(geosite:youtube) -> youtube
+    # Netflix
+    domain(geosite:netflix) -> netflix
+    # Bahamut
+    domain(geosite:bahamut) -> bahamut
+    # Bilibili
+    domain(geosite:bilibili) -> direct
+    # Overseas media
+    domain(geosite:youtube, geosite:netflix, geosite:disney, geosite:hbo, geosite:primevideo, geosite:twitch, geosite:spotify) -> media
+    # GFW list
+    domain(geosite:github) -> github
+    domain(geosite:google) -> google
+    domain(geosite:google-gemini) -> google
+    domain(geosite:gfw) -> proxy
+    # Mainland China
+    domain(geosite:cn) -> direct
+    dip(geoip:cn) -> direct
+    fallback: proxy
 }
 
 global {
