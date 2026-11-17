@@ -534,24 +534,19 @@ return view.extend({
 			E('img', { 'class': 'honk-header-logo', 'src': L.resource('view/honk/logo.png'), 'alt': '' }),
 			E('div', { 'class': 'honk-header-text' }, [
 				E('h2', {}, _('Maintenance')),
-				E('p', { 'class': 'honk-header-sub' }, _('Package updates, config backup and system recovery for the Honk installation.'))
+				E('p', { 'class': 'honk-header-sub' }, _('Config backup and system recovery for the Honk installation.'))
 			])
 		]));
 		page.appendChild(recoveryMessage);
 		page.appendChild(E('div', { 'class': 'honk-actions' }, [ recoverBtn ]));
 		page.appendChild(recoverMessage);
 		page.appendChild(dataSection);
-		page.appendChild(updateSection);
 		page.appendChild(backupSection);
 		page.appendChild(health);
 		page.appendChild(updateLog);
 
-		// Background index refresh so new versions show on the next poll.
-		fs.exec(REFRESH_INDEX, []).catch(function() {});
 		refreshData();
-		refreshPkgs();
 		poll.add(refreshData, 15);
-		poll.add(refreshPkgs, 15);
 
 		honk.status().then(function(result) {
 			const errors = Array.isArray(result && result.errors) ? result.errors : [];
