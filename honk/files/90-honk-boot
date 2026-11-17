@@ -23,4 +23,21 @@ if [ -z "$(uci -q get honk.main.clash_api_secret)" ]; then
 	uci -q commit honk
 fi
 
+
+# 【2026-11-17】system.dae 里预置的 clash_api 块 secret 是占位值，
+# 这里换成上面生成的随机值（每台机器不同）。system.dae 在 /rom 里是只读的，
+# 写入会落到 overlay，重启后仍有效。
+_secret=$(uci -q get honk.main.clash_api_secret)
+if [ -n "$_secret" ] && [ -f /etc/honk/system.dae ] && grep -q 'clash_api {' /etc/honk/system.dae; then
+	if ! grep -q "secret: '$_secret'" /etc/honk/system.dae; then
+		awk -v s="$_secret" '
+			/clash_api[[:space:]]*\{/ { inblk = 1 }
+			inblk && /^[[:space:]]*secret:/ { sub(/secret:.*/, "secret: \047" s "\047"); inblk = 0 }
+			{ print }
+		' /etc/honk/system.dae > /etc/honk/system.dae.new &&
+			mv -f /etc/honk/system.dae.new /etc/honk/system.dae &&
+			chmod 0600 /etc/honk/system.dae
+	fi
+fi
+
 exit 0
