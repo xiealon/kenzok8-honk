@@ -113,7 +113,9 @@ jobs:
           # provenance metadata still comes from the tag; it is installed as
           # /usr/share/honk/provenance.json.
           tag=$(sed -n 's/^HONK_SOURCE_TAG?=//p' honk/Makefile)
-          gh release download "$tag" --repo "${{ github.repository }}" \
+          # 上游 release 资产在 kenzok8/openwrt-honk（tag: source-*），fork 里没有，
+          # 这里显式指向上游；honk/Makefile 的二进制 URL 本来也指向上游。
+          gh release download "$tag" --repo "kenzok8/openwrt-honk" \
             --pattern 'generated-provenance.json' --dir honk --clobber
 
       - name: Build packages
