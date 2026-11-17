@@ -8,4 +8,19 @@ legacy_mode=$(uci -q get honk.main.config_mode 2>/dev/null)
 if [ -n "$legacy_mode" ]; then
 	uci -q delete honk.main.config_mode && uci -q commit honk
 fi
+# 【2026-11-17】Clash API 默认开启：设备上 9090 不听的根因不是包坏，
+# 而是 honk.config 里 clash_api_enabled 默认 '0'、secret 为空 —— control.sh 就不会向
+# /etc/honk/system.dae 写 clash_api 块，9090 也就永远不绑。
+# 这里只把开关置为开 + 生成一个本机随机密钥；代理本体仍需用户自己启用
+# （honk.main.enabled），安全姿态不变。
+# 密钥只要 6-128 位、字符集 A-Za-z0-9._-（control.sh:39 的 valid_clash_api）。
+if [ -z "$(uci -q get honk.main.clash_api_secret)" ]; then
+	_secret=$(head -c 64 /dev/urandom 2>/dev/null | tr -dc 'A-Za-z0-9' | cut -c1-16)
+	[ -n "$_secret" ] || _secret="honk-$RANDOM$RANDOM$RANDOM"
+	uci -q set honk.main.clash_api_enabled='1'
+	uci -q set honk.main.clash_api_port='9090'
+	uci -q set honk.main.clash_api_secret="$_secret"
+	uci -q commit honk
+fi
+
 exit 0
