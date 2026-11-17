@@ -218,22 +218,22 @@ global {
     nfqueue_enable: true
 }
 subscription {
-    cat0: {
+    0: {
         url: 'https://example0.com'
         interval: 24h
         route: direct
     }
-    xc1: {
+    1: {
         url: 'https://example1.com'
         interval: 24h
         route: direct
     }
-    pq2: {
+    2: {
         url: 'https://example2.com'
         ua: 'v2rayN'
         interval: 24h
     }
-    xg3: {
+    3: {
         url: 'https://example3.com'
         ua: 'v2rayN'
         interval: 24h
