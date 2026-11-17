@@ -4,46 +4,233 @@ include {
 
 group {
     proxy {
+        filter: group(sg)
+        filter: group(jp)
+        filter: group(kr)
+        filter: group(vn)
+        filter: group(hk)
+        filter: group(ao)
+        filter: group(tw)
         policy: min_moving_avg
+        interrupt_connections: true
+    }
+   # 自动选择
+    auto {
+        filter: group(sg)
+        filter: group(jp)
+        filter: group(kr)
+        filter: group(vn)
+        filter: group(hk)
+        filter: group(ao)
+        filter: group(tw)
+        policy: score
+        interrupt_connections: true
+    }
+   # 🇭🇰 香港
+    hk {
+       filter: name(regex: '港|HK|Hong Kong|HongKong|🇭🇰')
+       policy: score
+    }
+   # ao 澳门
+    ao {
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
+        policy: score
+    }
+   # 🇹🇼 台湾
+    tw {
+       filter: name(regex: '台|臺|TW|Taiwan|🇹🇼')
+       policy: score
+    }
+   # 🇺🇸 美国
+    us {
+    filter: name(regex: '美|US|United States|America|🇺🇸')
+    policy: score
+    }
+   # 🇸🇬 新加坡
+    sg {
+       filter: name(regex: '新加坡|獅城|狮城|SG|Singapore|🇸🇬')
+       policy: score
+    }
+   # 🇯🇵 日本
+    jp {
+       filter: name(regex: '日|JP|Japan|Tokyo|🇯🇵')
+       policy: score
+    }
+   # 🇰🇷 韩国
+    kr {
+       filter: name(regex: '韓|韩|KR|Korea|🇰🇷')
+       policy: score
+    }
+   # VN 越南
+    vn {
+        filter: name(regex: '(?i)(?:^|[^a-z0-9])vn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vnm(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vietnam(?:[^a-z0-9]|$)|越南|🇻🇳')
+        policy: score
+    }
+   # Telegram
+    telegram {
+       filter: group(hk)
+       filter: group(vn)
+       policy: select
+       final: proxy
+       interrupt_connections: true
+    }
+   # YouTube
+    youtube {
+       filter: group(hk)
+       filter: group(sg)
+       filter: group(vn)
+       policy: min_moving_avg
+       final: proxy
+       interrupt_connections: true
+    }
+   # Google
+    google {
+        filter: group(hk)
+        filter: group(sg)
+        filter: group(vn)
+        policy: score
+        final: auto
+        interrupt_connections: true
+    }
+   # github
+    github {
+      filter: group(hk)
+      filter: group(sg)
+      filter: group(vn)
+      policy: score
+      final: auto
+      interrupt_connections: true
+    }
+   # 国外媒体
+    media {
+       filter: group(proxy)
+       policy: select
+       interrupt_connections: true
+    }
+   # OpenAI
+    ai {
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])can(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])canada(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])toronto(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])yyz(?:[^a-z0-9]|$)|加拿大|🇨🇦')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
+       policy: select
+       interrupt_connections: true
+    }
+   # Netflix
+    netflix {
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])jp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])jpn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])japan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tokyo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])osaka(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nrt(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hnd(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])kix(?:[^a-z0-9]|$)|日本|東京|东京|大阪|🇯🇵')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])us(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])usa(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])united states(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])america(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])lax(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sjc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sea(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])nyc(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])los angeles(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])san jose(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])seattle(?:[^a-z0-9]|$)|美國|美国|洛杉磯|洛杉矶|聖何塞|圣何塞|西雅圖|西雅图|🇺🇸')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])sg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sgp(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])singapore(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])sin(?:[^a-z0-9]|$)|新加坡|獅城|狮城|🇸🇬')
+       policy: select
+       interrupt_connections: true
+    }
+   # 巴哈姆特
+    bahamut {
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])hk(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hkg(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hongkong(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])hong kong(?:[^a-z0-9]|$)|香港|港|🇭🇰')
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])tw(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])tpe(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taiwan(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])taipei(?:[^a-z0-9]|$)|台灣|台湾|臺灣|台北|🇹🇼')
+       policy: select
+       default: 'tw'
+       interrupt_connections: true
     }
 }
 
 dns {
-    # 直连查询带上客户端网段，国内 CDN 才会返回就近地址
-    client_subnet: auto
+    
     upstream {
-        default: 'https://223.5.5.5/dns-query?tls_server_name=dns.alidns.com' -> direct
-        remote: 'https://8.8.8.8/dns-query?tls_server_name=dns.google' -> proxy
+        lin: 'tcp://127.0.0.1:53'
+        sea: 'tcp://127.0.0.1:6553'
     }
     routing {
         request {
-            qname(geosite: private) -> asis
-            qname(geosite: cn) -> default
-            fallback: remote
+            qname(geosite: cn) -> lin
+            qname(suffix: api.github.com) && qtype(A) -> sea
+            qname(suffix: github.com) && qtype(A) -> sea
+            fallback: sea
         }
         # 远端返回国内 IP 时也采信，避免两边解析结果不一致
         response {
-            upstream(remote) -> accept
-            qname(geosite: private) -> accept
-            ip(geoip: cn) -> accept
-            fallback: remote
+            fallback: accept
         }
     }
 }
 
 routing {
-    dip(224.0.0.0/3, 'ff00::/8') -> direct
-    # 路由器自身地址直连，管理面板不被代理；服务启动时按本机地址重写下面区块
-    # honk:local-direct-begin
-    # honk:local-direct-end
-    dip(geoip: private) && !dport(53) -> direct(must)
-    dip(geoip: cn) && !dport(53) -> direct(must)
-    domain(geosite: cn) -> direct
-    # 这几类在 geosite: cn 里覆盖不全，单独列出
-    domain(geosite: apple-cn) -> direct
-    domain(geosite: category-games@cn) -> direct
-    domain(geosite: steam@cn) -> direct
-    domain(geosite: category-ai-cn) -> direct
-    domain(geosite: onedrive) -> direct
-    fallback: direct
+  # NetworkManager
+  pname(NetworkManager) -> direct
+  # dae presets: the LAN and multicast stay off the proxy
+  dip(224.0.0.0/3, 'ff00::/8') -> direct
+  dip(geoip:private) -> direct
+  # Block UDP/443
+  l4proto(udp) && dport(443) -> block
+  # Google China services and mainland games
+  domain(geosite:google-cn, geosite:category-games@cn) -> direct
+  # Microsoft
+  domain(geosite:microsoft) -> direct
+  # Apple
+  domain(geosite:apple) -> direct
+  # Telegram
+  domain(geosite:telegram) -> telegram
+  dip(geoip:telegram) -> telegram
+  # OpenAI
+  domain(geosite:openai) -> ai
+  # NetEase Music
+  domain(geosite:netease) -> direct
+  # Games
+  domain(geosite:category-games) -> direct
+  # YouTube
+  domain(geosite:youtube) -> youtube
+  # Netflix
+  domain(geosite:netflix) -> netflix
+  # Bahamut
+  domain(geosite:bahamut) -> bahamut
+  # Bilibili
+  domain(geosite:bilibili) -> direct
+  # Overseas media
+  domain(geosite:youtube, geosite:netflix, geosite:disney, geosite:hbo, geosite:primevideo, geosite:twitch, geosite:spotify) -> media
+  # GFW list
+  domain(geosite:github) -> github
+  domain(geosite:google) -> google
+  domain(geosite:google-gemini) -> google
+  domain(geosite:gfw) -> proxy
+  # Mainland China
+  domain(geosite:cn) -> direct
+  dip(geoip:cn) -> direct
+  fallback: proxy
+}
+
+global {
+    wan_interface: auto
+    lan_interface: br-lan
+    log_level: info
+    dial_mode: domain++
+    auto_config_kernel_parameter: true
+    data_dir: '/etc/honk/data'
+    # Empty: log to stdout, which procd forwards to syslog/logread.
+    log_file: ''
+    tcp_check_url: http://cp.cloudflare.com/generate_204
+    tcp_check_http_method: GET
+    check_tolerance: 100ms
+    check_interval: 300s
+    bootstrap_resolver: '223.5.5.5:53'
+    nfqueue_enable: true
+}
+subscription {
+    cat0: {
+        url: 'https://example0.com'
+        interval: 24h
+        route: direct
+    }
+    xc1: {
+        url: 'https://example1.com'
+        interval: 24h
+        route: direct
+    }
+    pq2: {
+        url: 'https://example2.com'
+        ua: 'v2rayN'
+        interval: 24h
+    }
 }
