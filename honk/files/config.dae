@@ -29,42 +29,75 @@ group {
    # 🇭🇰 香港
     hk {
        filter: name(regex: '港|HK|Hong Kong|HongKong|🇭🇰')
-       policy: score
+       policy: min_moving_avg
     }
    # ao 澳门
     ao {
-        filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
-        policy: score
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])mo(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])mac(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macau(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])macao(?:[^a-z0-9]|$)|澳門|澳门|🇲🇴')
+       policy: min_moving_avg
     }
    # 🇹🇼 台湾
     tw {
        filter: name(regex: '台|臺|TW|Taiwan|🇹🇼')
-       policy: score
+       policy: min_moving_avg
     }
    # 🇺🇸 美国
     us {
-    filter: name(regex: '美|US|United States|America|🇺🇸')
-    policy: score
+       filter: name(regex: '美|US|United States|America|🇺🇸')
+       policy: min_moving_avg
     }
    # 🇸🇬 新加坡
     sg {
        filter: name(regex: '新加坡|獅城|狮城|SG|Singapore|🇸🇬')
-       policy: score
+       policy: min_moving_avg
     }
    # 🇯🇵 日本
     jp {
        filter: name(regex: '日|JP|Japan|Tokyo|🇯🇵')
-       policy: score
+       policy: min_moving_avg
     }
    # 🇰🇷 韩国
     kr {
        filter: name(regex: '韓|韩|KR|Korea|🇰🇷')
-       policy: score
+       policy: min_moving_avg
     }
    # VN 越南
     vn {
-        filter: name(regex: '(?i)(?:^|[^a-z0-9])vn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vnm(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vietnam(?:[^a-z0-9]|$)|越南|🇻🇳')
-        policy: score
+       filter: name(regex: '(?i)(?:^|[^a-z0-9])vn(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vnm(?:[^a-z0-9]|$)|(?:^|[^a-z0-9])vietnam(?:[^a-z0-9]|$)|越南|🇻🇳')
+       policy: min_moving_avg
+    }
+   # YouTube
+    youtube {
+       filter: group(hk)
+       filter: group(sg)
+       filter: group(vn)
+       policy: score
+       final: auto
+       interrupt_connections: true
+    }
+   # Google
+    google {
+       filter: group(hk)
+       filter: group(sg)
+       filter: group(vn)
+       policy: score
+       final: auto
+       interrupt_connections: true
+    }
+   # github
+    github {
+       filter: group(hk)
+       filter: group(sg)
+       filter: group(vn)
+       policy: score
+       final: auto
+       interrupt_connections: true
+    }
+   # 国外媒体
+    media {
+       filter: group(proxy)
+       policy: select
+       interrupt_connections: true
     }
    # Telegram
     telegram {
@@ -72,39 +105,6 @@ group {
        filter: group(vn)
        policy: select
        final: proxy
-       interrupt_connections: true
-    }
-   # YouTube
-    youtube {
-       filter: group(hk)
-       filter: group(sg)
-       filter: group(vn)
-       policy: min_moving_avg
-       final: proxy
-       interrupt_connections: true
-    }
-   # Google
-    google {
-        filter: group(hk)
-        filter: group(sg)
-        filter: group(vn)
-        policy: score
-        final: auto
-        interrupt_connections: true
-    }
-   # github
-    github {
-      filter: group(hk)
-      filter: group(sg)
-      filter: group(vn)
-      policy: score
-      final: auto
-      interrupt_connections: true
-    }
-   # 国外媒体
-    media {
-       filter: group(proxy)
-       policy: select
        interrupt_connections: true
     }
    # OpenAI
@@ -233,4 +233,8 @@ subscription {
         ua: 'v2rayN'
         interval: 24h
     }
-}
+    xg3: {
+        url: 'https://example3.com'
+        ua: 'v2rayN'
+        interval: 24h
+    }
