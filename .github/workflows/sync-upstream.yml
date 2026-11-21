@@ -1,0 +1,88 @@
+name: Sync upstream
+
+# 把 kenzok8/openwrt-honk 的更新合进来。
+# 冲突处理策略（按文件区分）：
+#   honk/files/system.dae   -> 用本地（含 clash_api 预置 + 随机 secret 占位）
+#   其它                      -> 用上游（新版 UI / 脚本 / Makefile / config.dae 模板）
+# 合完不自动发版，先人工看一眼。
+on:
+  workflow_dispatch:
+    inputs:
+      upstream_repo:
+        description: '上游仓（owner/repo）'
+        required: false
+        default: 'kenzok8/openwrt-honk'
+      upstream_ref:
+        description: '上游分支'
+        required: false
+        default: 'main'
+      dry_run:
+        description: '只做合并不推送'
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge upstream
+        env:
+          UP_REPO: ${{ inputs.upstream_repo }}
+          UP_REF: ${{ inputs.upstream_ref }}
+        run: |
+          set -uo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add upstream "https://github.com/$UP_REPO.git"
+          git fetch --no-tags upstream "$UP_REF"
+          echo "==> 上游 HEAD: $(git rev-parse --short upstream/$UP_REF)"
+          echo "==> 本地 HEAD: $(git rev-parse --short HEAD)"
+          echo "==> 落后提交数: $(git rev-list --count HEAD..upstream/$UP_REF)"
+
+          if git merge --no-commit --no-ff "upstream/$UP_REF"; then
+            echo "==> 无冲突，直接合并"
+          else
+            echo "==> 有冲突，按策略解决："
+            for f in $(git diff --name-only --diff-filter=U); do
+              case "$f" in
+                honk/files/system.dae)
+                  echo "   [ours] $f"
+                  git checkout --ours -- "$f"
+                  ;;
+                *)
+                  if git cat-file -e ":3:$f" 2>/dev/null; then
+                    echo "   [theirs] $f"
+                    git checkout --theirs -- "$f"
+                  else
+                    echo "   [theirs-deleted] $f"
+                    git rm -q -- "$f"
+                  fi
+                  ;;
+              esac
+              git add -- "$f" 2>/dev/null || true
+            done
+            git diff --name-only --diff-filter=U || true
+            git commit -m "chore(sync): merge upstream $UP_REPO@$UP_REF（冲突按策略解决）"
+          fi
+
+      - name: Report result
+        run: |
+          set -euo pipefail
+          echo "==> 合并后 HEAD: $(git log --oneline -1)"
+          echo "==> 与上游差异文件数: $(git diff --name-only HEAD upstream/${{ inputs.upstream_ref }} | wc -l || true)"
+          git diff --stat HEAD~1 HEAD | tail -n 30
+
+      - name: Push
+        if: ${{ !inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          git push origin HEAD:main
