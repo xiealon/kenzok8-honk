@@ -179,6 +179,7 @@ routing {
     dip(geoip:private) -> direct
     # Block UDP/443
     l4proto(udp) && dport(443) -> block
+    # github
     domain(geosite:github) -> github
     # Microsoft
     domain(geosite:microsoft) -> direct
