@@ -179,8 +179,7 @@ routing {
     dip(geoip:private) -> direct
     # Block UDP/443
     l4proto(udp) && dport(443) -> block
-    # Google China services and mainland games
-    domain(geosite: google-cn, geosite: 'geosite:category-games@cn') -> direct
+    domain(geosite:github) -> github
     # Microsoft
     domain(geosite:microsoft) -> direct
     # Apple
@@ -205,7 +204,6 @@ routing {
     # Overseas media
     domain(geosite:youtube, geosite:netflix, geosite:disney, geosite:hbo, geosite:primevideo, geosite:twitch, geosite:spotify) -> media
     # GFW list
-    domain(geosite:github) -> github
     domain(geosite:google) -> google
     domain(geosite:google-gemini) -> google
     domain(geosite:gfw) -> proxy
